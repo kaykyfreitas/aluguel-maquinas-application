@@ -1,17 +1,20 @@
 package com.application.aluguelmaquinasapplication.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "avaliacao_usuario")
-public class AvaliacaoUsuario {
-    
-    @Id
-    private Integer id;
+@Inheritance
+public final class AvaliacaoUsuario extends AbstractEntity {
+
+    @Lob
+    @NotNull
     private String descricao;
+    @NotNull
     private Float avaliacao;
+    @NotNull
     @OneToOne
     @JoinColumn(name = "id_reserva")
     private Reserva reserva;

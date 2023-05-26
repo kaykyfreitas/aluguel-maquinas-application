@@ -1,99 +1,115 @@
 -- DDL -> USUARIO
 CREATE TABLE usuario
 (
-    cpf   VARCHAR(255) NOT NULL,
-    nome  VARCHAR(255) NULL,
-    email VARCHAR(255) NULL,
-    senha VARCHAR(255) NULL,
-    CONSTRAINT pk_usuario PRIMARY KEY (cpf)
+    id             BIGINT AUTO_INCREMENT NOT NULL,
+    data_alteracao datetime              NULL,
+    data_inclusao  datetime              NOT NULL,
+    cpf            VARCHAR(11)           NOT NULL,
+    nome           VARCHAR(80)           NOT NULL,
+    email          VARCHAR(200)          NOT NULL,
+    telefone       VARCHAR(11)           NOT NULL,
+    senha          VARCHAR(100)          NOT NULL,
+    CONSTRAINT pk_usuario PRIMARY KEY (id)
 );
 
 
 -- DDL -> ENDERECO
 CREATE TABLE endereco
 (
-    id          INT          NOT NULL,
-    cep         VARCHAR(255) NULL,
-    rua         VARCHAR(255) NULL,
-    numero      BIGINT       NULL,
-    cidade      VARCHAR(255) NULL,
-    bairro      VARCHAR(255) NULL,
-    uf          VARCHAR(255) NULL,
-    cpf_usuario VARCHAR(255) NULL,
+    id             BIGINT AUTO_INCREMENT NOT NULL,
+    data_alteracao datetime              NULL,
+    data_inclusao  datetime              NOT NULL,
+    cep            VARCHAR(8)            NOT NULL,
+    rua            VARCHAR(150)          NOT NULL,
+    numero         BIGINT                NOT NULL,
+    cidade         VARCHAR(50)           NOT NULL,
+    bairro         VARCHAR(50)           NOT NULL,
+    uf             VARCHAR(2)            NOT NULL,
+    id_usuario     BIGINT                NOT NULL,
     CONSTRAINT pk_endereco PRIMARY KEY (id)
 );
 
 ALTER TABLE endereco
-    ADD CONSTRAINT FK_ENDERECO_ON_CPF_USUARIO FOREIGN KEY (cpf_usuario) REFERENCES usuario (cpf);
+    ADD CONSTRAINT FK_ENDERECO_ON_ID_USUARIO FOREIGN KEY (id_usuario) REFERENCES usuario (id);
 
 
 -- DDL -> CATEGORIA
-CREATE TABLE categorias
+CREATE TABLE categoria
 (
-    id        INT          NOT NULL,
-    categoria VARCHAR(255) NULL,
-    CONSTRAINT pk_categorias PRIMARY KEY (id)
+    id             BIGINT AUTO_INCREMENT NOT NULL,
+    data_alteracao datetime              NULL,
+    data_inclusao  datetime              NOT NULL,
+    nome           VARCHAR(40)           NOT NULL,
+    CONSTRAINT pk_categoria PRIMARY KEY (id)
 );
 
 
 -- DDL -> MAQUINA
 CREATE TABLE maquina
 (
-    id           INT          NOT NULL,
-    titulo       VARCHAR(255) NULL,
-    descricao    VARCHAR(255) NULL,
-    valor_diaria DECIMAL      NULL,
-    id_categoria INT          NULL,
+    id             BIGINT AUTO_INCREMENT NOT NULL,
+    data_alteracao datetime              NULL,
+    data_inclusao  datetime              NOT NULL,
+    titulo         VARCHAR(80)           NOT NULL,
+    descricao      LONGTEXT              NOT NULL,
+    valor_diaria   DECIMAL               NOT NULL,
+    id_categoria   BIGINT                NOT NULL,
     CONSTRAINT pk_maquina PRIMARY KEY (id)
 );
 
 ALTER TABLE maquina
-    ADD CONSTRAINT FK_MAQUINA_ON_ID_CATEGORIA FOREIGN KEY (id_categoria) REFERENCES categorias (id);
+    ADD CONSTRAINT FK_MAQUINA_ON_ID_CATEGORIA FOREIGN KEY (id_categoria) REFERENCES categoria (id);
 
 
 -- DDL -> IMAGENS MAQUINA
-CREATE TABLE imagens_maquina
+CREATE TABLE imagem_maquina
 (
-    id         INT          NOT NULL,
-    nome       VARCHAR(255) NULL,
-    tipo       VARCHAR(255) NULL,
-    tamanho    BIGINT       NULL,
-    conteudo   VARCHAR(255) NULL,
-    id_maquina INT          NULL,
-    CONSTRAINT pk_imagens_maquina PRIMARY KEY (id)
+    id             BIGINT AUTO_INCREMENT NOT NULL,
+    data_alteracao datetime              NULL,
+    data_inclusao  datetime              NOT NULL,
+    nome           VARCHAR(100)          NOT NULL,
+    tipo           VARCHAR(5)            NOT NULL,
+    tamanho        BIGINT                NOT NULL,
+    conteudo       LONGTEXT              NOT NULL,
+    id_maquina     BIGINT                NOT NULL,
+    CONSTRAINT pk_imagemmaquina PRIMARY KEY (id)
 );
 
-ALTER TABLE imagens_maquina
-    ADD CONSTRAINT FK_IMAGENS_MAQUINA_ON_ID_MAQUINA FOREIGN KEY (id_maquina) REFERENCES maquina (id);
+ALTER TABLE imagem_maquina
+    ADD CONSTRAINT FK_IMAGEMMAQUINA_ON_ID_MAQUINA FOREIGN KEY (id_maquina) REFERENCES maquina (id);
 
 
 -- DDL -> RESERVA
 CREATE TABLE reserva
 (
-    id             INT          NOT NULL,
-    cpf_usuario    VARCHAR(255) NULL,
-    id_maquina     INT          NULL,
-    data_reserva   date         NULL,
-    data_retirada  date         NULL,
-    prev_devolucao date         NULL,
+    id                  BIGINT AUTO_INCREMENT NOT NULL,
+    data_alteracao      datetime              NULL,
+    data_inclusao       datetime              NOT NULL,
+    data_reserva        date                  NOT NULL,
+    data_retirada       date                  NOT NULL,
+    data_prev_devolucao date                  NOT NULL,
+    id_usuario          BIGINT                NOT NULL,
+    id_maquina          BIGINT                NOT NULL,
     CONSTRAINT pk_reserva PRIMARY KEY (id)
 );
 
 ALTER TABLE reserva
-    ADD CONSTRAINT FK_RESERVA_ON_CPF_USUARIO FOREIGN KEY (cpf_usuario) REFERENCES usuario (cpf);
+    ADD CONSTRAINT FK_RESERVA_ON_ID_MAQUINA FOREIGN KEY (id_maquina) REFERENCES maquina (id);
 
 ALTER TABLE reserva
-    ADD CONSTRAINT FK_RESERVA_ON_ID_MAQUINA FOREIGN KEY (id_maquina) REFERENCES maquina (id);
+    ADD CONSTRAINT FK_RESERVA_ON_ID_USUARIO FOREIGN KEY (id_usuario) REFERENCES usuario (id);
 
 
 -- DDL -> ALUGUEL
 CREATE TABLE aluguel
 (
-    id             INT     NOT NULL,
-    data_devolucao date    NULL,
-    multa          DECIMAL NULL,
-    valor_total    DECIMAL NULL,
-    id_reserva     INT     NULL,
+    id             BIGINT AUTO_INCREMENT NOT NULL,
+    data_alteracao datetime              NULL,
+    data_inclusao  datetime              NOT NULL,
+    data_devolucao date                  NOT NULL,
+    multa          DECIMAL               NULL,
+    valor_total    DECIMAL               NOT NULL,
+    id_reserva     BIGINT                NOT NULL,
     CONSTRAINT pk_aluguel PRIMARY KEY (id)
 );
 
@@ -104,26 +120,30 @@ ALTER TABLE aluguel
 -- DDL -> AVALIACAO USUARIO
 CREATE TABLE avaliacao_usuario
 (
-    id         INT          NOT NULL,
-    descricao  VARCHAR(255) NULL,
-    avaliacao  FLOAT        NULL,
-    id_reserva INT          NULL,
-    CONSTRAINT pk_avaliacao_usuario PRIMARY KEY (id)
+    id             BIGINT AUTO_INCREMENT NOT NULL,
+    data_alteracao datetime              NULL,
+    data_inclusao  datetime              NOT NULL,
+    descricao      LONGTEXT              NOT NULL,
+    avaliacao      FLOAT                 NOT NULL,
+    id_reserva     BIGINT                NOT NULL,
+    CONSTRAINT pk_avaliacaousuario PRIMARY KEY (id)
 );
 
 ALTER TABLE avaliacao_usuario
-    ADD CONSTRAINT FK_AVALIACAO_USUARIO_ON_ID_RESERVA FOREIGN KEY (id_reserva) REFERENCES reserva (id);
+    ADD CONSTRAINT FK_AVALIACAOUSUARIO_ON_ID_RESERVA FOREIGN KEY (id_reserva) REFERENCES reserva (id);
 
 
 -- DDL -> AVALIACAO MAQUINA
 CREATE TABLE avaliacao_maquina
 (
-    id         INT          NOT NULL,
-    descricao  VARCHAR(255) NULL,
-    avaliacao  FLOAT        NULL,
-    id_reserva INT          NULL,
-    CONSTRAINT pk_avaliacao_maquina PRIMARY KEY (id)
+    id             BIGINT AUTO_INCREMENT NOT NULL,
+    data_alteracao datetime              NULL,
+    data_inclusao  datetime              NOT NULL,
+    descricao      LONGTEXT              NOT NULL,
+    avaliacao      FLOAT                 NOT NULL,
+    id_reserva     BIGINT                NOT NULL,
+    CONSTRAINT pk_avaliacaomaquina PRIMARY KEY (id)
 );
 
 ALTER TABLE avaliacao_maquina
-    ADD CONSTRAINT FK_AVALIACAO_MAQUINA_ON_ID_RESERVA FOREIGN KEY (id_reserva) REFERENCES reserva (id);
+    ADD CONSTRAINT FK_AVALIACAOMAQUINA_ON_ID_RESERVA FOREIGN KEY (id_reserva) REFERENCES reserva (id);

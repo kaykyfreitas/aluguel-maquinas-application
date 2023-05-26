@@ -1,23 +1,27 @@
 package com.application.aluguelmaquinasapplication.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDate;
 
 @Data
 @Entity
-@Table(name = "reserva")
-public class Reserva {
+@Inheritance
+public final class Reserva extends AbstractEntity {
 
-    @Id
-    private Integer id;
+    @NotNull
     private LocalDate dataReserva;
+    @NotNull
     private LocalDate dataRetirada;
-    private LocalDate prevDevolucao;
+    @NotNull
+    private LocalDate dataPrevDevolucao;
+    @NotNull
     @ManyToOne
-    @JoinColumn(name = "cpf_usuario")
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "id_maquina")
     private Maquina maquina;
