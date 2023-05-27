@@ -23,7 +23,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     @Override
     public void atualizar(CategoriaDTO categoriaDTO) {
-        final var categoria = categoriaRepository.findById(categoriaDTO.())
+        final var categoria = categoriaRepository.findById(categoriaDTO.id())
                 .orElseThrow(() -> new NotFoundException("categoria nao encontrada"));
 
         categoria.setNome(categoriaDTO.nome());

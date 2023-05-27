@@ -3,3 +3,44 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+main {
+    margin: auto;
+    height: 400px;
+    width: 600px;
+}
+
+main section {
+    padding: 15px;
+    justify-content: center;
+    margin-top: 75px;
+    background-color: #F8F9FA;
+    border-radius: 5px;
+}
+
+main section h1 {
+    /*margin: auto;*/
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+main section h2 {
+    /*margin: auto;*/
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+main > section > form {
+    margin: auto;
+}
+
+main > section > form > button {
+    margin-top: 20px;
+    width: 570px;
+}

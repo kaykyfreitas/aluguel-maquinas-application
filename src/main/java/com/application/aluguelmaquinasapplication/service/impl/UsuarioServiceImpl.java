@@ -20,15 +20,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     @Transactional
     public void salvar(UsuarioDTO usuarioDTO) {
-        // Convertendo DTO
         final var usuario = usuarioDTO.toUsuario();
         final var endereco = usuarioDTO.endereco().toEndereco();
 
-        // Mapeando entidades
         usuario.setEndereco(endereco);
         endereco.setUsuario(usuario);
 
-        // Pesistindo entidades
         this.usuarioRepository.save(usuario);
     }
 
