@@ -8,7 +8,8 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Inheritance
 public final class Usuario extends AbstractEntity {
@@ -29,9 +30,32 @@ public final class Usuario extends AbstractEntity {
     @Size(max = 100)
     private String senha;
 
-    @OneToOne(mappedBy = "usuario")
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
     private Endereco endereco;
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private List<Reserva> reservas = new ArrayList<>();
 
+    public Usuario() { }
+
+    public Usuario(Long id, String cpf, String nome, String email, String telefone, String senha, Endereco endereco) {
+        this.id = id;
+        this.cpf = cpf;
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+        this.senha = senha;
+        this.endereco = endereco;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "cpf='" + cpf + '\'' +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", senha='" + senha + '\'' +
+                ", endereco=" + endereco.toString() +
+                '}';
+    }
 }

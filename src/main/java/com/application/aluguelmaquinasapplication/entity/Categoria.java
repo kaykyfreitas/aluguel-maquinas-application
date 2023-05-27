@@ -17,4 +17,10 @@ public final class Categoria extends AbstractEntity {
     @OneToOne(mappedBy = "categoria")
     private Maquina maquina;
 
+    public Categoria() { }
+
+    public Categoria(Long id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
 }
