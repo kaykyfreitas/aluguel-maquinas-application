@@ -17,6 +17,7 @@ public final class Reserva extends AbstractEntity {
     private LocalDate dataRetirada;
     @NotNull
     private LocalDate dataPrevDevolucao;
+    private LocalDate dataCancelamento;
     @NotNull
     @ManyToOne
     @JoinColumn(name = "id_usuario")
