@@ -68,9 +68,9 @@ CREATE TABLE imagem_maquina
     data_alteracao datetime              NULL,
     data_inclusao  datetime              NOT NULL,
     nome           VARCHAR(100)          NOT NULL,
-    tipo           VARCHAR(5)            NOT NULL,
+    tipo           VARCHAR(30)           NOT NULL,
     tamanho        BIGINT                NOT NULL,
-    conteudo       LONGTEXT              NOT NULL,
+    conteudo       LONGBLOB              NOT NULL,
     id_maquina     BIGINT                NOT NULL,
     CONSTRAINT pk_imagemmaquina PRIMARY KEY (id)
 );

@@ -27,7 +27,7 @@ public final class Maquina extends AbstractEntity {
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
 
-    @OneToMany(mappedBy = "maquina", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "maquina", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<ImagemMaquina> imagensMaquina = new ArrayList<>();
     @OneToMany(mappedBy = "maquina", fetch = FetchType.LAZY)
     private List<Reserva> reservas = new ArrayList<>();

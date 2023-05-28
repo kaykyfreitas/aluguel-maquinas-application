@@ -36,10 +36,13 @@
                             <a class="nav-link" href="/categoria/list">Listagem categoria</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/maquina/create">Cadastro maquina</a>
+                            <a class="nav-link" href="/maquina/create">Cadastro maquina</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/maquina/list">Listagem maquina</a>
+                            <a class="nav-link active" aria-current="page" href="/maquina/list">Listagem maquina</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/imagem/create">Cadastro imagem maquina</a>
                         </li>
                     </ul>
                 </div>
@@ -58,6 +61,7 @@
             <th scope="col">categoria</th>
             <th scope="col">#</th>
             <th scope="col">#</th>
+            <th scope="col">#</th>
         </tr>
         </thead>
         <tbody>
@@ -67,6 +71,9 @@
             <td data-th-text="${maquina.descricao}"></td>
             <td data-th-text="${{maquina.valorDiaria}}"></td>
             <td data-th-text="${maquina.categoria}"></td>
+            <td>
+                <a th:href="@{/imagem/maquina/{id}(id = ${maquina.id})}">imagens</a>
+            </td>
             <td>
                 <a th:href="@{/maquina/edit/{id}(id = ${maquina.id})}">Edit</a>
             </td>

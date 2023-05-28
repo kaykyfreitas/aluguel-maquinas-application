@@ -14,16 +14,30 @@ public final class ImagemMaquina extends AbstractEntity {
     @Size(max = 100)
     private String nome;
     @NotNull
-    @Size(max = 5)
+    @Size(max = 30)
     private String tipo;
     @NotNull
     private Long tamanho;
     @Lob
     @NotNull
-    private String conteudo;
+    private byte[] conteudo;
     @NotNull
     @ManyToOne
     @JoinColumn(name = "id_maquina")
     private Maquina maquina;
+
+    public ImagemMaquina() { }
+
+    public ImagemMaquina(String nome, String tipo, Long tamanho, byte[] conteudo, Long idMaquina) {
+        this.nome = nome;
+        this.tipo = tipo;
+        this.tamanho = tamanho;
+        this.conteudo = conteudo;
+
+        final var maquina = new Maquina();
+        maquina.setId(idMaquina);
+
+        this.maquina = maquina;
+    }
 
 }
