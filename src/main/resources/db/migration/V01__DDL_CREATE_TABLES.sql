@@ -52,7 +52,7 @@ CREATE TABLE maquina
     data_inclusao  datetime              NOT NULL,
     titulo         VARCHAR(80)           NOT NULL,
     descricao      LONGTEXT              NOT NULL,
-    valor_diaria   DECIMAL               NOT NULL,
+    valor_diaria   DECIMAL(15,2)         NOT NULL,
     id_categoria   BIGINT                NOT NULL,
     CONSTRAINT pk_maquina PRIMARY KEY (id)
 );
@@ -88,6 +88,7 @@ CREATE TABLE reserva
     data_reserva        date                  NOT NULL,
     data_retirada       date                  NOT NULL,
     data_prev_devolucao date                  NOT NULL,
+    data_cancelamento   date                  NULL,
     id_usuario          BIGINT                NOT NULL,
     id_maquina          BIGINT                NOT NULL,
     CONSTRAINT pk_reserva PRIMARY KEY (id)

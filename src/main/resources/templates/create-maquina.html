@@ -17,7 +17,7 @@
     <!-- CSS -->
     <link th:href="@{/styles/global.css}" rel="stylesheet" />
 
-    <title>Cadastro de usuario</title>
+    <title>Cadastro de maquina</title>
 </head>
 <body>
 
@@ -34,13 +34,13 @@
                             <a class="nav-link" href="/usuario/list">Listagem usuarios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/categoria/create">Cadastro categoria</a>
+                            <a class="nav-link" href="/categoria/create">Cadastro categoria</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/categoria/list">Listagem categoria</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/maquina/create">Cadastro maquina</a>
+                            <a class="nav-link active" aria-current="page" href="/maquina/create">Cadastro maquina</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/maquina/list">Listagem maquina</a>
@@ -55,15 +55,30 @@
 
         <section>
 
-            <h1>Categoria</h1>
+            <h1>Maquina</h1>
 
-            <form method="POST" action="/categoria/create" enctype="multipart/form-data" th:object="${categoria}">
+            <form method="POST" action="/maquina/create" enctype="multipart/form-data" th:object="${maquina}">
 
-                <input type="hidden" name="id" th:value="${categoria.id}">
+                <input type="hidden" name="id" th:value="${maquina.id}">
 
                 <div class="mb-3">
-                    <label for="nomeInputId" class="form-label">Insira o nome da categoria</label>
-                    <input type="text" class="form-control" id="nomeInputId" name="nome" th:value="${categoria.nome}">
+                    <label for="nomeInputId" class="form-label">Insira o titulo</label>
+                    <input type="text" class="form-control" id="nomeInputId" name="titulo" th:value="${maquina.titulo}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="cpfInputId" class="form-label">Insira a descricao</label>
+                    <input type="text" class="form-control" id="cpfInputId" name="descricao" th:value="${maquina.descricao}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="emailInputId" class="form-label">Insira o valor da diaria</label>
+                    <input type="text" class="form-control" id="emailInputId" name="valorDiaria" th:value="${maquina.valorDiaria}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="telefoneInputId" class="form-label">Insira o id da categoria</label>
+                    <input type="text" class="form-control" id="telefoneInputId" name="idCategoria" th:value="${maquina.idCategoria}">
                 </div>
 
                 <button type="submit" class="btn btn-primary">Enviar</button>

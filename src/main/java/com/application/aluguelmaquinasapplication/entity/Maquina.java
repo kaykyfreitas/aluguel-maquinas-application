@@ -32,4 +32,13 @@ public final class Maquina extends AbstractEntity {
     @OneToMany(mappedBy = "maquina", fetch = FetchType.LAZY)
     private List<Reserva> reservas = new ArrayList<>();
 
+    public Maquina() { }
+
+    public Maquina(Long id, String titulo, String descricao, BigDecimal valorDiaria, Categoria categoria) {
+        this.id = id;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.valorDiaria = valorDiaria;
+        this.categoria = categoria;
+    }
 }

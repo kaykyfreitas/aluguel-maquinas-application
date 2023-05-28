@@ -14,11 +14,8 @@ public interface ReservaService {
     List<Reserva> consultaTodas();
     List<Reserva> consultarPorMaquina(Long idMaquina);
     List<Reserva> consultarPorUsuario(Long idUsuario);
-    List<Reserva> consultarReservasAtivas();
     List<Reserva> consultarReservasCanceladas();
     List<Reserva> consultarReservasAbertas();
-    List<Reserva> consultarReservasFechadas(); 
-    
+    List<Reserva> consultarReservasFechadas();
 
-    
 }

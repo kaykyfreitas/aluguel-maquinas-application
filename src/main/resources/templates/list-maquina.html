@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link th:href="@{/styles/global.css}" rel="stylesheet" />
 
-    <title>Listagem de tarefas</title>
+    <title>Listagem de maquinas</title>
 </head>
 <body>
 
@@ -33,10 +33,10 @@
                             <a class="nav-link" href="/categoria/create">Cadastro categoria</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/categoria/list">Listagem categoria</a>
+                            <a class="nav-link" href="/categoria/list">Listagem categoria</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/maquina/create">Cadastro maquina</a>
+                            <a class="nav-link active" aria-current="page" href="/maquina/create">Cadastro maquina</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/maquina/list">Listagem maquina</a>
@@ -52,20 +52,26 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">nome</th>
+            <th scope="col">titulo</th>
+            <th scope="col">descricao</th>
+            <th scope="col">diaria</th>
+            <th scope="col">categoria</th>
             <th scope="col">#</th>
             <th scope="col">#</th>
         </tr>
         </thead>
         <tbody>
-        <tr data-th-each="categoria : ${categorias}">
-            <td data-th-text="${categoria.id}"></td>
-            <td data-th-text="${categoria.nome}"></td>
+        <tr data-th-each="maquina : ${maquinas}">
+            <td data-th-text="${maquina.id}"></td>
+            <td data-th-text="${maquina.titulo}"></td>
+            <td data-th-text="${maquina.descricao}"></td>
+            <td data-th-text="${{maquina.valorDiaria}}"></td>
+            <td data-th-text="${maquina.categoria}"></td>
             <td>
-                <a th:href="@{/categoria/edit/{id}(id = ${categoria.id})}">Edit</a>
+                <a th:href="@{/maquina/edit/{id}(id = ${maquina.id})}">Edit</a>
             </td>
             <td>
-                <a th:href="@{'/categoria/delete/'+${categoria.id}}">Delete</a>
+                <a th:href="@{'/maquina/delete/'+${maquina.id}}">Delete</a>
             </td>
         </tr>
         </tbody>
