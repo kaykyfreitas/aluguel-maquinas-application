@@ -40,4 +40,18 @@ public record UsuarioDTO(
 
     }
 
+    public Usuario toUsuarioSemEndereco() {
+
+        return new Usuario(
+                this.id,
+                this.cpf,
+                this.nome,
+                this.email,
+                this.telefone,
+                this.senha,
+                null
+        );
+
+    }
+
 }

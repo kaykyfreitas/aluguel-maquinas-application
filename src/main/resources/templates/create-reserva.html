@@ -17,7 +17,7 @@
     <!-- CSS -->
     <link th:href="@{/styles/global.css}" rel="stylesheet" />
 
-    <title>Cadastro de usuario</title>
+    <title>Cadastro de reserva</title>
 </head>
 <body>
 
@@ -28,13 +28,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="/usuario/create">Cadastro usuario</a>
+                            <a class="nav-link active" aria-current="page" href="/usuario/create">Cadastro usuario</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/usuario/list">Listagem usuarios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/categoria/create">Cadastro categoria</a>
+                            <a class="nav-link" href="/categoria/create">Cadastro categoria</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/categoria/list">Listagem categoria</a>
@@ -49,10 +49,7 @@
                             <a class="nav-link" href="/imagem/create">Cadastro imagem maquina</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/imagem/create">Cadastrar Reserva</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/imagem/create">Listagem reserva</a>
+                            <a class="nav-link" href="/reserva/list">Lista reserva</a>
                         </li>
                     </ul>
                 </div>
@@ -64,15 +61,30 @@
 
         <section>
 
-            <h1>Categoria</h1>
+            <h1>Usuario</h1>
 
-            <form method="POST" action="/categoria/create" enctype="multipart/form-data" th:object="${categoria}">
+            <form method="POST" action="/reserva/create" enctype="multipart/form-data" th:object="${reserva}">
 
-                <input type="hidden" name="id" th:value="${categoria.id}">
+                <input type="hidden" name="id" th:value="${reserva.id}">
 
                 <div class="mb-3">
-                    <label for="nomeInputId" class="form-label">Insira o nome da categoria</label>
-                    <input type="text" class="form-control" id="nomeInputId" name="nome" th:value="${categoria.nome}">
+                    <label for="idUsuarioInputId" class="form-label">Inserir Id usuario</label>
+                    <input type="text" class="form-control" id="idUsuarioInputId" name="idUsuario" th:value="${reserva.idUsuario}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="idMaquinaInputid" class="form-label">Inserir Id maquina</label>
+                    <input type="text" class="form-control" id="idMaquinaInputid" name="idMaquina" th:value="${reserva.idMaquina}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="dataRetirada" class="form-label">Data de retirada</label>
+                    <input type="text" class="form-control" id="dataRetirada" name="dataRetirada" th:value="${reserva.dataRetirada}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="dataPrevDevolucao" class="form-label">Data prevista de devolução</label>
+                    <input type="text" class="form-control" id="dataPrevDevolucao" name="dataPrevDevolucao" th:value="${reserva.dataPrevDevolucao}">
                 </div>
 
                 <button type="submit" class="btn btn-primary">Enviar</button>

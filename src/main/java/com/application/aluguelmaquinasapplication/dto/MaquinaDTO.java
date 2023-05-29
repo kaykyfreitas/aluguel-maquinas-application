@@ -36,4 +36,16 @@ public record MaquinaDTO(
 
     }
 
+    public Maquina toMaquinaSemCategoria() {
+
+        return new Maquina(
+                this.id,
+                this.titulo,
+                this.descricao,
+                this.valorDiaria,
+                null
+        );
+
+    }
+
 }

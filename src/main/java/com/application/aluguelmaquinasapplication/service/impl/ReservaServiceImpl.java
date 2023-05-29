@@ -6,6 +6,7 @@ import java.util.List;
 import org.aspectj.bridge.Message;
 import org.springframework.stereotype.Service;
 
+import com.application.aluguelmaquinasapplication.dto.ReservaDTO;
 import com.application.aluguelmaquinasapplication.entity.Reserva;
 import com.application.aluguelmaquinasapplication.exception.NotFoundException;
 import com.application.aluguelmaquinasapplication.repository.ReservaRepository;
@@ -20,7 +21,9 @@ public class ReservaServiceImpl implements ReservaService {
     private final ReservaRepository reservaRepository;
 
     @Override
-    public void reservar(Reserva reserva) {
+    public void reservar(ReservaDTO reservaDTO) {
+        final var reserva = reservaDTO.toReserva();
+        reserva.setDataReserva(LocalDate.now());
         reservaRepository.save(reserva);
     }
 
@@ -32,56 +35,57 @@ public class ReservaServiceImpl implements ReservaService {
     }
 
     @Override
-    public void alterar(Reserva reservaDTO) {
-        var reserva = reservaRepository.findById(reservaDTO.getId()).orElseThrow(()-> new NotFoundException("reserva nao encontrada"));
+    public void alterar(ReservaDTO reservaDTO) {
+        var reserva = reservaRepository.findById(reservaDTO.id()).orElseThrow(()-> new NotFoundException("reserva nao encontrada"));
         
-        reserva.setDataRetirada(reservaDTO.getDataRetirada());
-        reserva.setDataPrevDevolucao(reservaDTO.getDataPrevDevolucao());
-        reserva.setMaquina(reservaDTO.getMaquina());
+        reserva.setDataRetirada(reservaDTO.dataRetirada());
+        reserva.setDataPrevDevolucao(reservaDTO.dataPrevDevolucao());
+        reserva.setMaquina(reservaDTO.maquina().toMaquinaSemCategoria());
         
         reservaRepository.save(reserva);
     }
 
     @Override
-    public Reserva consultarPorId(Long id) {
-        return reservaRepository.findById(id).orElseThrow(()-> new NotFoundException("reserva nao encontrada"));
+    public ReservaDTO consultarPorId(Long id) {
+        final var reserva = reservaRepository.findById(id).orElseThrow(()-> new NotFoundException("reserva nao encontrada"));
+        return ReservaDTO.fromReserva(reserva);
     }
 
     @Override
-    public List<Reserva> consultaTodas() {
-        return reservaRepository.findAll();
+    public List<ReservaDTO> consultaTodas() {
+        return reservaRepository.findAll().stream().map(ReservaDTO::fromReserva).toList();
     }
 
     @Override
-    public List<Reserva> consultarPorMaquina(Long idMaquina) {
+    public List<ReservaDTO> consultarPorMaquina(Long idMaquina) {
 //        return reservaRepository.findAllByMaquina_Id(idMaquina);
         return null;
     }
 
     @Override
-    public List<Reserva> consultarPorUsuario(Long idUsuario) {
+    public List<ReservaDTO> consultarPorUsuario(Long idUsuario) {
 //        return reservaRepository.findAllByUsuario_Id(idUsuario);
         return null;
     }
 
 
-    @Override
-    public List<Reserva> consultarReservasCanceladas() {
-//        return reservaRepository.findAllReservasAbertas();
-        return null;
-    }
+//     @Override
+//     public List<ReservaDTO> consultarReservasCanceladas() {
+// //        return reservaRepository.findAllReservasAbertas();
+//         return null;
+//     }
 
-    @Override
-    public List<Reserva> consultarReservasAbertas() {
-//      return reservaRepository.findAllReservasAbertas();
-        return null;
-    }
+//     @Override
+//     public List<ReservaDTO> consultarReservasAbertas() {
+// //      return reservaRepository.findAllReservasAbertas();
+//         return null;
+//     }
 
-    @Override
-    public List<Reserva> consultarReservasFechadas() {
-//        return reservaRepository.findAllReservasFechadas();
-        return null;
-    }
+//     @Override
+//     public List<ReservaDTO> consultarReservasFechadas() {
+// //        return reservaRepository.findAllReservasFechadas();
+//         return null;
+//     }
 
 
     

@@ -11,7 +11,8 @@ import java.time.LocalDate;
 @Inheritance
 public final class Reserva extends AbstractEntity {
 
-    @NotNull
+  
+	@NotNull
     private LocalDate dataReserva;
     @NotNull
     private LocalDate dataRetirada;
@@ -33,5 +34,20 @@ public final class Reserva extends AbstractEntity {
     private AvaliacaoUsuario avaliacaoUsuario;
     @OneToOne(mappedBy = "reserva")
     private AvaliacaoMaquina avaliacaoMaquina; 
+
+    public Reserva(){
+        
+    }
+
+    public Reserva(Long id, LocalDate dataReserva, LocalDate dataRetirada, LocalDate dataPrevDevolucao,
+    LocalDate dataCancelamento, Usuario usuario, Maquina maquina) {
+        this.id = id;
+        this.dataReserva = dataReserva;
+        this.dataRetirada = dataRetirada;
+        this.dataPrevDevolucao = dataPrevDevolucao;
+        this.dataCancelamento = dataCancelamento;
+        this.usuario = usuario;
+        this.maquina = maquina;
+    }
 
 }

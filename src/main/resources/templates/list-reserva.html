@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link th:href="@{/styles/global.css}" rel="stylesheet" />
 
-    <title>Listagem de maquinas</title>
+    <title>Listagem de tarefas</title>
 </head>
 <body>
 
@@ -27,7 +27,7 @@
                             <a class="nav-link" href="/usuario/create">Cadastro usuario</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/usuario/list">Listagem usuarios</a>
+                            <a class="nav-link active" aria-current="page" href="/usuario/list">Listagem usuarios</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/categoria/create">Cadastro categoria</a>
@@ -39,13 +39,10 @@
                             <a class="nav-link" href="/maquina/create">Cadastro maquina</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/maquina/list">Listagem maquina</a>
+                            <a class="nav-link" href="/maquina/list">Listagem maquina</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/imagem/create">Cadastro imagem maquina</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/reserva/create">Cadastro Reserva</a>
                         </li>
                     </ul>
                 </div>
@@ -58,31 +55,38 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">titulo</th>
-            <th scope="col">descricao</th>
-            <th scope="col">diaria</th>
-            <th scope="col">categoria</th>
+            <th scope="col">Nome do usuario</th>
+            <th scope="col">Maquina</th>
+            <th scope="col">Valor Diário</th>
+            <th scope="col">Data Reserva</th>
+            <th scope="col">Data Retirada</th>
+            <th scope="col">Data prevista de devolução</th>
+            <th scope="col">Data de cancelamento</th>
             <th scope="col">#</th>
             <th scope="col">#</th>
-            <th scope="col">#</th>
+                        
         </tr>
         </thead>
         <tbody>
-        <tr data-th-each="maquina : ${maquinas}">
-            <td data-th-text="${maquina.id}"></td>
-            <td data-th-text="${maquina.titulo}"></td>
-            <td data-th-text="${maquina.descricao}"></td>
-            <td data-th-text="${{maquina.valorDiaria}}"></td>
-            <td data-th-text="${maquina.categoria}"></td>
+        <tr data-th-each="reserva : ${reservas}">
+            <td data-th-text="${reserva.id}"></td>
+            <!-- <td data-th-text="${reserva.cpfUsuario}"></td> -->
+            <!-- <td data-th-text="${reserva.nomeMaquina}"></td> -->
+            <td data-th-text="${reserva.idUsuario}"></td>
+            <td data-th-text="${reserva.idMaquina}"></td>
+            <!-- <td data-th-text="${reserva.valorDiaria}"></td> -->
+            <td data-th-text="${reserva.dataReserva}"></td>
+            <td data-th-text="${reserva.dataRetirada}"></td>
+            <td data-th-text="${reserva.dataPrevDevolucao}"></td>
+            <td data-th-text="${reserva.dataCancelamento}"></td>
             <td>
-                <a th:href="@{/imagem/maquina/{id}(id = ${maquina.id})}">imagens</a>
+                <a th:href="@{'/reserva/cancelar/'+${reserva.id}}">Cancelar</a>
             </td>
             <td>
-                <a th:href="@{/maquina/edit/{id}(id = ${maquina.id})}">Edit</a>
+                <a th:href="@{/reserva/edit/{id}(id = ${reserva.id})}">Edit</a>
             </td>
-            <td>
-                <a th:href="@{'/maquina/delete/'+${maquina.id}}">Delete</a>
-            </td>
+
+            
         </tr>
         </tbody>
     </table>
