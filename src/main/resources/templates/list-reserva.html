@@ -55,7 +55,8 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Nome do usuario</th>
+            <th scope="col">CPF do usuario</th>
+            <th scope="col">id Maquina</th>
             <th scope="col">Maquina</th>
             <th scope="col">Valor Diário</th>
             <th scope="col">Data Reserva</th>
@@ -70,11 +71,10 @@
         <tbody>
         <tr data-th-each="reserva : ${reservas}">
             <td data-th-text="${reserva.id}"></td>
-            <!-- <td data-th-text="${reserva.cpfUsuario}"></td> -->
-            <!-- <td data-th-text="${reserva.nomeMaquina}"></td> -->
-            <td data-th-text="${reserva.idUsuario}"></td>
+            <td data-th-text="${reserva.cpfUsuario}"></td> 
             <td data-th-text="${reserva.idMaquina}"></td>
-            <!-- <td data-th-text="${reserva.valorDiaria}"></td> -->
+            <td data-th-text="${reserva.nomeMaquina}"></td>
+            <td data-th-text="${{reserva.valorDiaria}}"></td> 
             <td data-th-text="${reserva.dataReserva}"></td>
             <td data-th-text="${reserva.dataRetirada}"></td>
             <td data-th-text="${reserva.dataPrevDevolucao}"></td>

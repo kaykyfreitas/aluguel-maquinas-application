@@ -1,6 +1,9 @@
 package com.application.aluguelmaquinasapplication.dto.view;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+
+import org.springframework.format.annotation.NumberFormat;
 
 import com.application.aluguelmaquinasapplication.dto.MaquinaDTO;
 import com.application.aluguelmaquinasapplication.dto.ReservaDTO;
@@ -13,7 +16,12 @@ public record ReservaViewDTO(
         LocalDate dataPrevDevolucao,
         LocalDate dataCancelamento,
         Long idUsuario,
-        Long idMaquina
+        Long idMaquina,
+        String cpfUsuario,
+        String nomeMaquina,
+        
+        @NumberFormat
+        BigDecimal valorDiaria
 ) {
 
     public static ReservaViewDTO empty() {
@@ -25,8 +33,10 @@ public record ReservaViewDTO(
                 null,
                 null,
                 null,
-                null
-              
+                null,
+                null,
+                null,
+                null           
         );
 
     }
@@ -60,7 +70,10 @@ public record ReservaViewDTO(
                reservaDTO.dataPrevDevolucao(),
                reservaDTO.dataCancelamento(),
                reservaDTO.usuario().id(),
-               reservaDTO.maquina().id()
+               reservaDTO.maquina().id(),
+               reservaDTO.usuario().cpf(),
+               reservaDTO.maquina().titulo(),
+               reservaDTO.maquina().valorDiaria()
         );
 
     }
