@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link th:href="@{/styles/global.css}" rel="stylesheet" />
 
-    <title>Listagem de tarefas</title>
+    <title>Listagem de reservas</title>
 </head>
 <body>
 
@@ -27,7 +27,7 @@
                             <a class="nav-link" href="/usuario/create">Cadastro usuario</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/usuario/list">Listagem usuarios</a>
+                            <a class="nav-link"  href="/usuario/list">Listagem usuarios</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/categoria/create">Cadastro categoria</a>
@@ -43,6 +43,12 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/imagem/create">Cadastro imagem maquina</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/reserva/create">Cadastro reserva</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/reserva/list">Listagem reserva</a>
                         </li>
                     </ul>
                 </div>
@@ -75,10 +81,10 @@
             <td data-th-text="${reserva.idMaquina}"></td>
             <td data-th-text="${reserva.nomeMaquina}"></td>
             <td data-th-text="${{reserva.valorDiaria}}"></td> 
-            <td data-th-text="${reserva.dataReserva}"></td>
-            <td data-th-text="${reserva.dataRetirada}"></td>
-            <td data-th-text="${reserva.dataPrevDevolucao}"></td>
-            <td data-th-text="${reserva.dataCancelamento}"></td>
+            <td data-th-text="${{reserva.dataReserva}}"></td>
+            <td data-th-text="${{reserva.dataRetirada}}"></td>
+            <td data-th-text="${{reserva.dataPrevDevolucao}}"></td>
+            <td data-th-text="${{reserva.dataCancelamento}}"></td>
             <td>
                 <a th:href="@{'/reserva/cancelar/'+${reserva.id}}">Cancelar</a>
             </td>

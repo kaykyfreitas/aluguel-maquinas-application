@@ -3,6 +3,7 @@ package com.application.aluguelmaquinasapplication.dto.view;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
 import com.application.aluguelmaquinasapplication.dto.MaquinaDTO;
@@ -11,9 +12,17 @@ import com.application.aluguelmaquinasapplication.dto.UsuarioDTO;
 
 public record ReservaViewDTO(
         Long id,
+
+        @DateTimeFormat(pattern = "dd/MM/yyyy")
         LocalDate dataReserva,
+
+        @DateTimeFormat(pattern = "dd/MM/yyyy")
         LocalDate dataRetirada,
+        
+        @DateTimeFormat(pattern = "dd/MM/yyyy")
         LocalDate dataPrevDevolucao,
+
+        @DateTimeFormat(pattern = "dd/MM/yyyy")
         LocalDate dataCancelamento,
         Long idUsuario,
         Long idMaquina,
