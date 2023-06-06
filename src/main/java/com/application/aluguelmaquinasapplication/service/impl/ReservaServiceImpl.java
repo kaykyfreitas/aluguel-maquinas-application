@@ -25,7 +25,7 @@ public class ReservaServiceImpl extends ValidacaoService<Reserva> implements Res
     @Override
     protected void validarObjeto(Reserva obj){
         super.validarObjeto(obj);
-        if (Objects.isNull(obj.getDataReserva()))
+        if (Objects.isNull(obj.getDataPrevDevolucao()))
             throw new ValidacaoException("data reserva nulo");
     }
 

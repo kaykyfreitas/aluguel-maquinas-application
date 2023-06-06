@@ -29,7 +29,7 @@ public class ImagemMaquinaController {
 
     @PostMapping("/create")
     public String create(ImagemMaquinaViewDTO imagemMaquinaViewDTO) {
-        imagemMaquinaService.salvarImagem(imagemMaquinaViewDTO.toImagemMaquinaDTO());
+      imagemMaquinaService.salvarImagem(imagemMaquinaViewDTO.toImagemMaquinaDTO());
         return "redirect:/imagem/maquina/" + imagemMaquinaViewDTO.idMaquina();
     }
 
