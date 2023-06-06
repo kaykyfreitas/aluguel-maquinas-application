@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDate;
 
 @Data
@@ -48,6 +50,13 @@ public final class Reserva extends AbstractEntity {
         this.dataCancelamento = dataCancelamento;
         this.usuario = usuario;
         this.maquina = maquina;
+    }
+
+    @Override
+    @PrePersist
+    protected void prePersist() {
+        this.data_inclusao = Timestamp.from(Instant.now());
+        this.dataReserva = LocalDate.now();
     }
 
 }

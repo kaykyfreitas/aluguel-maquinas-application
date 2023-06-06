@@ -2,6 +2,7 @@ package com.application.aluguelmaquinasapplication.service.impl;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 import org.aspectj.bridge.Message;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.application.aluguelmaquinasapplication.dto.ReservaDTO;
 import com.application.aluguelmaquinasapplication.entity.Reserva;
 import com.application.aluguelmaquinasapplication.exception.NotFoundException;
+import com.application.aluguelmaquinasapplication.exception.ValidacaoException;
 import com.application.aluguelmaquinasapplication.repository.ReservaRepository;
 import com.application.aluguelmaquinasapplication.service.ReservaService;
 
@@ -16,13 +18,22 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class ReservaServiceImpl implements ReservaService {
+public class ReservaServiceImpl extends ValidacaoService<Reserva> implements ReservaService{
 
     private final ReservaRepository reservaRepository;
 
     @Override
+    protected void validarObjeto(Reserva obj){
+        super.validarObjeto(obj);
+        if (Objects.isNull(obj.getDataReserva()))
+            throw new ValidacaoException("data reserva nulo");
+    }
+
+    @Override
     public void reservar(ReservaDTO reservaDTO) {
+    
         final var reserva = reservaDTO.toReserva();
+        this.validarObjeto(reserva);
         reserva.setDataReserva(LocalDate.now());
         reservaRepository.save(reserva);
     }
